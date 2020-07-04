@@ -16,5 +16,5 @@ jobs:
         dockerfile: Dockerfile_build_outside
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
-        repository: maxhorstmann/build-outside-test
+        repository: ${{ format('{0}/build-outside-test', secrets.DOCKERHUB_USERNAME) }}
         tags: latest
