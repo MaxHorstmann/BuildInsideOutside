@@ -1,0 +1,9 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:latest AS build
+WORKDIR /src
+COPY src /src
+RUN dotnet publish --configuration Release --nologo -p:CI=true -o ./buildOutput src
+
+FROM mcr.microsoft.com/dotnet/core/aspnet:latest AS runtime
+WORKDIR /app
+COPY --from=build /src/buildOutput ./
+ENTRYPOINT ["dotnet", "MyTestApp.dll"]
