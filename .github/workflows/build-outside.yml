@@ -14,7 +14,6 @@ jobs:
       uses: docker/build-push-action@v1
       with:
         dockerfile: Dockerfile_build_outside
-        registry: docker.pkg.github.com
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
         repository: maxhorstmann/build-outside-test
