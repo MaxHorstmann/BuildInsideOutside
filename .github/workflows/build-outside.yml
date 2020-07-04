@@ -17,5 +17,5 @@ jobs:
         registry: docker.pkg.github.com
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
-        repository: ${{ format('{0}/build-inside', secrets.DOCKERHUB_USERNAME) }}
+        repository: maxhorstman/build-outside-test
         tags: latest
