@@ -1,0 +1,4 @@
+FROM mcr.microsoft.com/dotnet/core/aspnet:latest
+WORKDIR /app
+COPY buildOutput /app
+ENTRYPOINT ["dotnet", "MyTestApp.dll"]

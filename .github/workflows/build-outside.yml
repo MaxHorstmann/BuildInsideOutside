@@ -1,0 +1,20 @@
+name: build-outside
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+    - name: .NET Publish
+      run: dotnet publish --configuration Release --nologo -p:CI=true -o $GITHUB_WORKSPACE/buildOutput src
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v1
+      with:
+        file: Dockerfile_build_outside
+        registry: docker.pkg.github.com
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
+        repository: ${{ format("{0}/build-inside", secrets.DOCKERHUB_USERNAME) }}
